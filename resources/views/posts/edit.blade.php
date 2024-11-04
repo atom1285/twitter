@@ -46,26 +46,25 @@
             @endif
             <h4> Share yours ideas </h4>
             <div class="row">
-                <form action="{{ route("post.store") }}" method="post">
+                <form action="{{ route("post.update", $post->id)}}" method="post">
                     @csrf
+                    @method('put')
                     <div class="mb-3">
-                        <textarea name="content" class="form-control" id="idea" rows="3"></textarea>
+                        <textarea name="content" class="form-control" id="idea" rows="3">
+                            {{ $post->content }}
+                        </textarea>
                         @error("content")
-                            <span style="color: red">
+                        <span style="color: red">
                                 {{ $message }}
                             </span>
                         @enderror
                     </div>
                     <div class="">
-                        <button class="btn btn-dark"> Share</button>
+                        <button class="btn btn-dark"> Update</button>
                     </div>
                 </form>
             </div>
             <hr>
-            @foreach($posts as $post)
-                {{-- includes card --}}
-                @include('inc._post')
-            @endforeach
         </div>
         <div class="col-3">
             @include('inc._searchBar')
@@ -106,3 +105,4 @@
         </div>
     </div>
 @endsection
+

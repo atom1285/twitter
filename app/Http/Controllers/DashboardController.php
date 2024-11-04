@@ -2,14 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Post;
 
-class DashboardController
+class DashboardController extends Controller
 {
     public function index()
     {
-        $users = User::factory(50)->make();
+        /*Post::create([
+            'content' => "test",
+            'likes' => 21,
+        ]);*/
 
-        return view('dashboard', compact('users'));
+        $posts = Post::query()->orderBy('created_at', 'DESC');
+
+        if (request()->filled('search')) {
+            $posts = $posts->where('content', 'like', '%'.request()->get('search', '').'%');
+        }
+
+        return view(
+            'dashboard',
+            [
+                'posts' => $posts->get(),
+            ],
+        );
     }
 }

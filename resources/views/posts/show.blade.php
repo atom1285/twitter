@@ -51,7 +51,7 @@
                     <div class="mb-3">
                         <textarea name="content" class="form-control" id="idea" rows="3"></textarea>
                         @error("content")
-                            <span style="color: red">
+                        <span style="color: red">
                                 {{ $message }}
                             </span>
                         @enderror
@@ -62,10 +62,7 @@
                 </form>
             </div>
             <hr>
-            @foreach($posts as $post)
-                {{-- includes card --}}
                 @include('inc._post')
-            @endforeach
         </div>
         <div class="col-3">
             @include('inc._searchBar')
@@ -106,3 +103,4 @@
         </div>
     </div>
 @endsection
+
